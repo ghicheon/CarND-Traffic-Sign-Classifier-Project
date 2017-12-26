@@ -17,12 +17,6 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-caution.jpg
-bumpy_road.jpg
-30.jpg
-100.jpg
-stop.jpg        
-
 [image1]: ./image1.png "Traffic sign example"
 [img1]: ./caution.jpg     "Traffic sign example"
 [img2]: ./bumpy_road.jpg  "Traffic sign example"
@@ -169,33 +163,36 @@ Here are five German traffic signs that I found on the web:
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+---------------------------------------
+Image         /     Prediction
+---------------------------------------
+road work     / road work(0)
+bumpy road    / Traffic signal(X)
+30 km limit   / 30 km limit(O)
+100 km limit  / Yield (X)
+stop          / stop  (O)
+---------------------------------------
 
-
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The number of the correct answers  is 3 of 5. Its accuracy is 60%.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+image no:  [5 softmax probabilities]       / traffic sign number for each probabilities]
+------------------------------------------------------------------------------------------------
+image 1 : [ 0.36683694  0.24223693  0.17578086  0.13434605  0.08079918]  /  [25 31 29 22 30]
+image 2 : [ 0.47163591  0.42746091  0.10126442  0.03440959 -0.03477075]  /  [26 18 20 17 11]
+image 3 : [ 0.66248077  0.15732659  0.14507991  0.03227759  0.00283519]  /  [ 1  5  2  3 15]
+image 4 : [ 0.30347174  0.28631833  0.26845863  0.12229205  0.0194592 ]  /  [13 15 12  1 26]
+image 5 : [ 0.75186783  0.11564886  0.10517246  0.08320452 -0.05589365]  /  [14 17  5  1  3]
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+* image 1: the prediction is correct. It's kind of easy becuase the background is so simple and the traffic sign is so clear.
+* image 2: the answer is wrong. I think the reason is that background is so complicated and the sign is so small in the image.  
+* image 3: correct. the sign is so clear and so big(compared to the image 2).
+* image 4: wrong. the size of the image is so small and  the background is not simple.
+           I think some preprocessing is needed to eliminate meaningless area.I mean the image needs to occupy lots of area in 32x32 image.
+* image 5: it's correct.so simple background & big sign compared to the size of the image.
 
 
-For the second image ... 
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?

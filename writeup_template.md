@@ -2,8 +2,6 @@
 
 ## Writeup
 
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
 ---
 
 **Build a Traffic Sign Recognition Project**
@@ -19,14 +17,18 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+caution.jpg
+bumpy_road.jpg
+30.jpg
+100.jpg
+stop.jpg        
+
+[image1]: ./image1.png "Traffic sign example"
+[img1]: ./caution.jpg     "Traffic sign example"
+[img2]: ./bumpy_road.jpg  "Traffic sign example"
+[img3]: ./30.jpg          "Traffic sign example"
+[img4]: ./100.jpg         "Traffic sign example"
+[img5]: ./stop.jpg        "Traffic sign example"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -36,24 +38,34 @@ The goals / steps of this project are the following:
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+This file is for that. Here is a link to my code.
+
+[code](https:https://github.com/ghicheon/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
 #### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-I used the pandas library to calculate summary statistics of the traffic
-signs data set:
+I used numpy library for it.
 
 * The size of training set is ?
+There are 34799 training data.
+
 * The size of the validation set is ?
+There are 4410  validation data.
+
 * The size of test set is ?
+There are 12630 testing examples.
+
 * The shape of a traffic sign image is ?
+All data is 32x32 images.All has 3 channels.
+
 * The number of unique classes/labels in the data set is ?
+There are 43 Traffic sign in data set.
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+I'll show one example image in training data set.
 
 ![alt text][image1]
 
@@ -61,66 +73,87 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because ...
-
-Here is an example of a traffic sign image before and after grayscaling.
-
-![alt text][image2]
-
-As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
+After I loaded all data set, I divided all pixcel by 255 for normalization.  Therefore, all pixcel values will be between 0 and 1.  It will reduce training time and avoide local minimum. 
 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-My final model consisted of the following layers:
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+My model has 7 layers below.
+
+#Layer 1: Convolutional. Input: 32x32x3. Output: 28x28x32 =>14x14x32
+The output of convolution will be 28x28 because the kernel size is 5x5 and padding is VALID. 32 filters will be enough.
+After that, max polling makes the final output 14*14
+max    Pooling. Input = 28x28x32. Output = 14x14x32
+
+#Layer 2: Convolutional. Input: 14x14x32 Output = 10x10x64 =>5x5x64
+This layer has 64 filters. The convolution shape will be having 10x10x64 because kernel size is 5x5 and valid padding is done. 
+Final output will be 5x5x64  due to max pooling.
+
+Flattening is done for fully connected layers.
+
+#Layer 3: Fully Connected. Input = 5*5*64 Output = 256.
+
+#Layer 4: drop out
+Drop out is added. It reduced overfitting for sure. The keeping probability is 50%.
+
+#Layer 5: Fully Connected. Input = 256. Output = 128.
+
+#Layer 6: drop out
+The probability is 50%.
+
+#Layer 7: Fully Connected. Input = 128. Output = 43.
+Final output is 43 probilities. Each of them means the possibilities for each traffic signs.
+
+Yeah, the model is based on LeNet. Compared to LeNet, I used more neurons/filters and added drop out layer.
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+I used Adam optimizer to train the model because it gave me good results(97% test accuracy).
+The batch size is 128.
+To select the training data,I got 128 random number among the number of traing set. Then trained the model with it. I repeated this pross 30000 times. It means around 234 epoches was executed.
+
+((34799/128)*30000)/34799  = 234.375
+
+Every 100 repeats, I checked test/validation accuracy. If this validation accuracy is better than previous best score, it will be saved as the file "./my_traffic_sign_classifier".
+
+
+
+
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
+
 * training set accuracy of ?
+0.999971263542  
+
 * validation set accuracy of ? 
+0.972562358277
+
 * test set accuracy of ?
+0.970546318139
+
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
+LeNet Architecture.
+
 * What were some problems with the initial architecture?
+It gave me not bad results. But it seems to suffer from under fitting  due to less neurons.
+
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+I used more filters for convolution and more nodes for fully connected layer.
+
 * Which parameters were tuned? How were they adjusted and why?
+After using more neurons, I got better results around 94% test accuracy. But it didn't improve  the performance any more. It seems to suffer from over-fitting!
+Finally, I added drop out layers. It overcame the limitation. I got 97% test accuracy.
+
+
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+Well.. I found out there is no optimal solution in all cases. When over fitting occurs, it will be better to add drop out or max pooling. if we encounter under fitting,it might help add more nodes or filters.
 
 ### Test a Model on New Images
 
@@ -128,10 +161,9 @@ If a well known architecture was chosen:
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][img1] ![alt text][img2] ![alt text][img3] 
+![alt text][img4] ![alt text][img5]
 
-The first image might be difficult to classify because ...
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 

@@ -42,24 +42,24 @@ This file is for that. Here is a link to my code.
 
 I used numpy library for it.
 
-* The size of training set is ?
+* The size of training set is ?   
 There are 34799 training data.
 
-* The size of the validation set is ?
+* The size of the validation set is ?   
 There are 4410  validation data.
 
-* The size of test set is ?
+* The size of test set is ?    
 There are 12630 testing examples.
 
-* The shape of a traffic sign image is ?
+* The shape of a traffic sign image is ?   
 All data is 32x32 images.All has 3 channels.
 
-* The number of unique classes/labels in the data set is ?
+* The number of unique classes/labels in the data set is ?   
 There are 43 Traffic sign in data set.
 
 #### 2. Include an exploratory visualization of the dataset.
 
-I'll show one example image in training data set.
+I'll show one example image in training data set.   
 
 ![alt text][image1]
 
@@ -75,21 +75,21 @@ After I loaded all data set, I divided all pixcel by 255 for normalization.  The
 
 My model has 7 layers below.
 
-#Layer 1: Convolutional. Input: 32x32x3. Output: 28x28x32 =>14x14x32
-The output of convolution will be 28x28 because the kernel size is 5x5 and padding is VALID. 32 filters will be enough.
-After that, max polling makes the final output 14*14
-max    Pooling. Input = 28x28x32. Output = 14x14x32
+#Layer 1: Convolutional. Input: 32x32x3. Output: 28x28x32 =>14x14x32     
+The output of convolution will be 28x28 because the kernel size is 5x5 and padding is VALID. 32 filters will be enough.   
+After that, max polling makes the final output 14*14     
+max    Pooling. Input = 28x28x32. Output = 14x14x32   
 
 #Layer 2: Convolutional. Input: 14x14x32 Output = 10x10x64 =>5x5x64
-This layer has 64 filters. The convolution shape will be having 10x10x64 because kernel size is 5x5 and valid padding is done. 
-Final output will be 5x5x64  due to max pooling.
+This layer has 64 filters. The convolution shape will be having 10x10x64 because kernel size is 5x5 and valid padding is done.   
+Final output will be 5x5x64  due to max pooling.   
 
-Flattening is done for fully connected layers.
+Flattening is done for fully connected layers.   
 
-#Layer 3: Fully Connected. Input = 5*5*64 Output = 256.
+#Layer 3: Fully Connected. Input = 5*5*64 Output = 256.   
 
 #Layer 4: drop out
-Drop out is added. It reduced overfitting for sure. The keeping probability is 50%.
+Drop out is added. It reduced overfitting for sure. The keeping probability is 50%.  
 
 #Layer 5: Fully Connected. Input = 256. Output = 128.
 
@@ -120,32 +120,32 @@ Every 100 repeats, I checked test/validation accuracy. If this validation accura
 
 My final model results were:
 
-* training set accuracy of ?
-0.999971263542  
+* training set accuracy of ?   
+ 0.99985631771      
 
-* validation set accuracy of ? 
-0.972562358277
+* validation set accuracy of ?     
+ 0.971428571429
 
-* test set accuracy of ?
-0.970546318139
+* test set accuracy of ?    
+0.970467141651    
 
 
 If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
+* What was the first architecture that was tried and why was it chosen?    
 LeNet Architecture.
 
-* What were some problems with the initial architecture?
+* What were some problems with the initial architecture?    
 It gave me not bad results. But it seems to suffer from under fitting  due to less neurons.
 
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.    
 I used more filters for convolution and more nodes for fully connected layer.
 
-* Which parameters were tuned? How were they adjusted and why?
+* Which parameters were tuned? How were they adjusted and why?    
 After using more neurons, I got better results around 94% test accuracy. But it didn't improve  the performance any more. It seems to suffer from over-fitting!
 Finally, I added drop out layers. It overcame the limitation. I got 97% test accuracy.
 
 
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?    
 
 Well.. I found out there is no optimal solution in all cases. When over fitting occurs, it will be better to add drop out or max pooling. if we encounter under fitting,it might help add more nodes or filters.
 
@@ -163,34 +163,34 @@ Here are five German traffic signs that I found on the web:
 
 Here are the results of the prediction:
 
----------------------------------------
-Image         /     Prediction
----------------------------------------
-road work     / road work(0)
-bumpy road    / Traffic signal(X)
-30 km limit   / 30 km limit(O)
-100 km limit  / Yield (X)
-stop          / stop  (O)
----------------------------------------
+---------------------------------------   
+Image         /     Prediction    
+---------------------------------------   
+road work     / road work(0)     
+bumpy road    / Traffic signal(X)     
+30 km limit   / 30 km limit(O)     
+100 km limit  / Yield (X)     
+stop          / stop  (O)    
+---------------------------------------     
 
 The number of the correct answers  is 3 of 5. Its accuracy is 60%.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-image no:  [5 softmax probabilities]       / traffic sign number for each probabilities]
-------------------------------------------------------------------------------------------------
-image 1 : [ 0.36683694  0.24223693  0.17578086  0.13434605  0.08079918]  /  [25 31 29 22 30]
-image 2 : [ 0.47163591  0.42746091  0.10126442  0.03440959 -0.03477075]  /  [26 18 20 17 11]
-image 3 : [ 0.66248077  0.15732659  0.14507991  0.03227759  0.00283519]  /  [ 1  5  2  3 15]
-image 4 : [ 0.30347174  0.28631833  0.26845863  0.12229205  0.0194592 ]  /  [13 15 12  1 26]
-image 5 : [ 0.75186783  0.11564886  0.10517246  0.08320452 -0.05589365]  /  [14 17  5  1  3]
+image no:  [5 softmax probabilities]       / traffic sign number for each probabilities]     
+------------------------------------------------------------------------------------------------   
+image 1 : [ 0.36683694  0.24223693  0.17578086  0.13434605  0.08079918]  /  [25 31 29 22 30]    
+image 2 : [ 0.47163591  0.42746091  0.10126442  0.03440959 -0.03477075]  /  [26 18 20 17 11]    
+image 3 : [ 0.66248077  0.15732659  0.14507991  0.03227759  0.00283519]  /  [ 1  5  2  3 15]    
+image 4 : [ 0.30347174  0.28631833  0.26845863  0.12229205  0.0194592 ]  /  [13 15 12  1 26]    
+image 5 : [ 0.75186783  0.11564886  0.10517246  0.08320452 -0.05589365]  /  [14 17  5  1  3]    
 
-* image 1: the prediction is correct. It's kind of easy becuase the background is so simple and the traffic sign is so clear.
-* image 2: the answer is wrong. I think the reason is that background is so complicated and the sign is so small in the image.  
-* image 3: correct. the sign is so clear and so big(compared to the image 2).
-* image 4: wrong. the size of the image is so small and  the background is not simple.
-           I think some preprocessing is needed to eliminate meaningless area.I mean the image needs to occupy lots of area in 32x32 image.
-* image 5: it's correct.so simple background & big sign compared to the size of the image.
+* image 1: the prediction is correct. It's kind of easy becuase the background is so simple and the traffic sign is so clear.    
+* image 2: the answer is wrong. I think the reason is that background is so complicated and the sign is so small in the image.     
+* image 3: correct. the sign is so clear and so big(compared to the image 2).    
+* image 4: wrong. the size of the image is so small and  the background is not simple.    
+           I think some preprocessing is needed to eliminate meaningless area.I mean the image needs to occupy lots of area in 32x32 image.    
+* image 5: it's correct.so simple background & big sign compared to the size of the image.    
 
 
 

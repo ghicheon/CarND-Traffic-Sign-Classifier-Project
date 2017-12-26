@@ -177,7 +177,7 @@ The number of the correct answers  is 3 of 5. Its accuracy is 60%.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-image no:  [5 softmax probabilities]       / traffic sign number for each probabilities]     
+image no:  [5 softmax probabilities]       / [traffic sign number for each probabilities]     
 ------------------------------------------------------------------------------------------------   
 image 1 : [ 0.36683694  0.24223693  0.17578086  0.13434605  0.08079918]  /  [25 31 29 22 30]    
 image 2 : [ 0.47163591  0.42746091  0.10126442  0.03440959 -0.03477075]  /  [26 18 20 17 11]    
@@ -189,7 +189,7 @@ image 5 : [ 0.75186783  0.11564886  0.10517246  0.08320452 -0.05589365]  /  [14 
 * image 2: the answer is wrong. I think the reason is that background is so complicated and the sign is so small in the image.     
 * image 3: correct. the sign is so clear and so big(compared to the image 2).    
 * image 4: wrong. the size of the image is so small and  the background is not simple.    
-           I think some preprocessing is needed to eliminate meaningless area.I mean the image needs to occupy lots of area in 32x32 image.    
+           I think some preprocessing is needed to eliminate meaningless area.I mean the traffic sign needs to occupy lots of area in 32x32 image.    
 * image 5: it's correct.so simple background & big sign compared to the size of the image.    
 
 

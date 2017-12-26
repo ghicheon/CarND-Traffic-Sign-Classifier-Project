@@ -34,7 +34,7 @@ The goals / steps of this project are the following:
 
 This file is for that. Here is a link to my code.
 
-[code](https:https://github.com/ghicheon/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+[code](https://github.com/ghicheon/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
 ### Data Set Summary & Exploration
 
